@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Initiate Transaction</title>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h2>Enter Details</h2>
+
+        <form action="/api/transaction/" method="post">
+            {% csrf_token %}
+
+            <div class="form-group row">
+                <label for="accountId" class="col-4 col-form-label">Account ID</label> 
+                <div class="col-8">
+                    <input id="accountId" name="accountId" placeholder="Account ID" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="hash" class="col-4 col-form-label">Hash</label> 
+                <div class="col-8">
+                    <input id="hash" name="hash" placeholder="Hash" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="transactionId" class="col-4 col-form-label">Transaction ID</label> 
+                <div class="col-8">
+                    <input id="transactionId" name="transactionId" placeholder="Transaction ID" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="firstName" class="col-4 col-form-label">First Name</label> 
+                <div class="col-8">
+                    <input id="firstName" name="firstName" placeholder="First Name" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="lastName" class="col-4 col-form-label">Last Name</label> 
+                <div class="col-8">
+                    <input id="lastName" name="lastName" placeholder="Last Name" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="callingCode" class="col-4 col-form-label">Calling Code</label> 
+                <div class="col-8">
+                    <input id="callingCode" name="callingCode" placeholder="Calling Code" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="phoneNumber" class="col-4 col-form-label">Phone</label> 
+                <div class="col-8">
+                    <input id="phoneNumber" name="phoneNumber" placeholder="Phone" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="emailId" class="col-4 col-form-label">Email</label> 
+                <div class="col-8">
+                    <input id="emailId" name="emailId" placeholder="Email" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="amount" class="col-4 col-form-label">Amount</label> 
+                <div class="col-8">
+                    <input id="amount" name="amount" placeholder="Amount" type="number" step=0.01 required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="productInformation" class="col-4 col-form-label">Product Information</label> 
+                <div class="col-8">
+                    <input id="productInformation" name="productInformation" placeholder="Product Information" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                <label for="choiceSelection" class="col-4 col-form-label">Payment Mode</label> 
+                <div class="col-8">
+                    <select id="choiceSelection" name="choiceSelection" class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <optgroup label="UPI">
+                            <option value="upiId">UPI ID</option>
+                            <option value="upiApp">UPI App</option>
+                        </optgroup>
+                        <option value="Card">Credit Card / Debit Card / Gift Card / Voucher Card</option>
+                        <option value="NB">Net Banking</option>
+                        <option value="Wallet">Wallet</option>
+                    </select>
+                </div>
+            </div> -->
+
+            <!-- <input name="paymentMode" type="hidden" value="UPI">
+            <input name="upiChoice" type="hidden" value="upiId">
+
+            <div class="form-group row">
+                <label for="upiId" class="col-4 col-form-label">UPI ID</label>
+                <div class="col-8">
+                    <input id="upiId" name="upiId" placeholder="UPI ID" type="text" class="form-control">
+                </div>
+            </div> -->
+
+            <div class="form-group row">
+                <label for="choiceSelection" class="col-4 col-form-label">Payment Mode</label> 
+                <div class="col-8">
+                    <select id="choiceSelection" name="choiceSelection" class="form-select" aria-label="Default select example">
+                        <option value="UPI">UPI</option>
+                        <!-- <optgroup label="UPI">
+                            <option value="upiId">UPI ID</option>
+                            <option value="upiApp">UPI App</option>
+                        </optgroup> -->
+                        <option value="Card">Credit Card / Debit Card / Gift Card / Voucher Card</option>
+                        <!-- <option value="NB">Net Banking</option> -->
+                        <option value="Wallet">Wallet</option> 
+                        <option value="Easypaisa">Easypaisa</option> 
+                        <option value="JazzCash">JazzCash</option> 
+                    </select>
+                </div>
+            </div>
+
+            <div id="selectFields">
+            </div>
+
+            <!-- <div class="form-group row">
+                <label for="udf1" class="col-4 col-form-label">UDF 1</label> 
+                <div class="col-8">
+                    <input id="udf1" name="udf1" placeholder="UDF 1" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="udf2" class="col-4 col-form-label">UDF 2</label> 
+                <div class="col-8">
+                    <input id="udf2" name="udf2" placeholder="UDF 2" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="udf3" class="col-4 col-form-label">UDF 3</label> 
+                <div class="col-8">
+                    <input id="udf3" name="udf3" placeholder="UDF 3" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="udf4" class="col-4 col-form-label">UDF 4</label> 
+                <div class="col-8">
+                    <input id="udf4" name="udf4" placeholder="UDF 4" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="udf5" class="col-4 col-form-label">UDF 5</label> 
+                <div class="col-8">
+                    <input id="udf5" name="udf5" placeholder="UDF 5" type="text" class="form-control">
+                </div>
+            </div> -->
+
+            <div class="form-group row">
+                <label for="countryCode" class="col-4 col-form-label">Country Code</label> 
+                <div class="col-8">
+                    <input id="countryCode" name="countryCode" placeholder="Country Code" type="number" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="currencyCode" class="col-4 col-form-label">Currency Code</label> 
+                <div class="col-8">
+                    <input id="currencyCode" name="currencyCode" placeholder="Currency Code" type="number" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="cnic" class="col-4 col-form-label">CNIC</label>
+                <div class="col-8">
+                    <input id="cnic" name="cnic" placeholder="CNIC" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="redirectURL" class="col-4 col-form-label">Redirect URL</label> 
+                <div class="col-8">
+                    <input id="redirectURL" name="redirectURL" placeholder="Redirect URL" type="text" required="required" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <input name="submit" class="btn btn-primary" type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        var paymentMode = document.getElementById("choiceSelection");
+        var selectFields = document.getElementById("selectFields");
+
+        paymentMode.addEventListener("change", function() {
+            var selectedMode = paymentMode.value;
+            var fields = ``;
+
+            if (selectedMode === 'UPI') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="UPI">
+                    <input name="upiChoice" type="hidden" value="upiId">
+
+                    <div class="form-group row">
+                        <label for="upiId" class="col-4 col-form-label">UPI ID</label>
+                        <div class="col-8">
+                            <input id="upiId" name="upiId" placeholder="UPI ID" type="text" class="form-control">
+                        </div>
+                    </div>
+                `;
+            } else if (selectedMode === 'Card') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="Card">
+                `;
+            } else if (selectedMode === 'Wallet') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="Wallet">
+                `;
+            } else if (selectedMode === 'NB') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="NB">
+                `;
+            } else if (selectedMode === 'Easypaisa') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="Easypaisa">
+                `;
+            } else if (selectedMode === 'JazzCash') {
+                fields += `
+                    <input name="paymentMode" type="hidden" value="JazzCash">
+                `;
+            }
+
+            selectFields.innerHTML = fields;
+        });
+    </script>
+</body>
+</html>

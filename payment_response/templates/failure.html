@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Failed Transaction</title>
+
+    <script type="text/javascript">
+        function countdownTimer() {
+            var count = 7;
+
+            //var timer = setInterval(function() {
+            //    document.getElementById("timer").innerHTML = count;
+            //    count--;
+            //    if (count < 0) {
+            //        clearInterval(timer);
+            //        document.getElementById("response").submit();
+            //    }
+            //}, 1000);
+
+            document.getElementById("redirect-button").addEventListener("click", function() {
+                clearInterval(timer);
+                document.getElementById("response").submit();
+            });
+        }
+    </script>
+</head>
+<body  onload="countdownTimer()">
+    <div class='main_content my-5'
+    style='display: flex; justify-content: center; align-items: center; height: 100vh'>
+
+        <form id="response" action="https://{{ data.redirectURL }}" method="post">
+            {% csrf_token %}
+            {% for key,value in data.items %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+        </form>
+
+        <div className='container'>
+            <h2 style= 'text-align:center; color:red'><b>Transaction failed!</b></h2>
+
+            <div>
+                <h4> Error Response </h4>
+            </div>
+
+            <div className='card mt-3 mb-5'>
+                <p className='my-3'
+                    style= 'text-align:center'>
+                    {{ data.errorReason }}
+                    <br/>
+                    {{ data.errorMessage }}
+                </p>
+            </div>
+
+            <table class="my-3 table" style='border: 1px solid black; border-collapse: collapse' >
+                <tbody>
+                    <tr>
+                        <th style='font-size: 20px'>Items bought</th>
+                        <td style='font-size: 20px'>{{ data.productInformaton }}</td>
+                    </tr>
+
+                    <tr>
+                        <th style='font-size: 20px'>Total amount paid</th>
+                        <td style='font-size: 20px'>₹{{ data.netAmountDebit }}</td>
+                    </tr>
+
+                    <tr>
+                        <th style='font-size: 20px'>Payment Mode</th>
+                        <td style='font-size: 20px'>{{ data.paymentMode }}</td>
+                    </tr>
+
+                    <tr>
+                        <th style='font-size: 20px'>Transaction Id</th>
+                        <td style='font-size: 20px'>{{ data.transactionId }}</td>
+                    </tr>
+
+                    <tr>
+                        <th style='font-size: 20px'>Transaction Time</th>
+                        <td style='font-size: 20px'>{{ data.transactionTime }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div className='card'>
+                <p className='my-3'
+                    style= 'text-align:center'>
+                    You will be redirected to Tumile's page in <span id="timer"></span> seconds automatically OR
+                    Click the 'Redirect' button below
+                </p>
+            </div>
+
+            <div style='display:flex;justify-content:center;align-items:center'>
+                <button id="redirect-button" class='my-3 btn btn-primary'>Redirect</button>
+            </div>
+
+            <div className='mt-3'>
+                <b>For any queries, reach us out at:</b>
+                <br />
+                <!-- <i class="fa-solid fa-phone"></i> 1800-9000-000 <br /> -->
+                <i class="fa fa-envelope" aria-hidden="true"></i> complaints@max-payments.com
+            </div>
+        </div>
+    </div>
+</body>
+</html>
